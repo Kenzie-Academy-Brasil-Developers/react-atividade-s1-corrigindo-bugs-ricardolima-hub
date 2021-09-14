@@ -1,20 +1,21 @@
 import { useState } from "react";
-import { Card } from "../card";
+import Card from "../card";
 import "./style.css";
 
 const CardsList = ({ cardsList }) => {
   const [suitFilter, setSuitFilter] = useState(false);
 
   const handleSuitFilter = (e) => {
-    if (e.target.id = suitFilter) {
-      suitFilter = true;
+    if (e.target.id === suitFilter) {
+      suitFilter(false);
       e.target.checked = false;
     } else {
-      suitFilter = e.target.id
+      setSuitFilter(e.target.id)
     }
   };
 
   return (
+    <>
     <div className="filter-container">
       <p>Filtrar por naipe</p>
       <div>
@@ -61,10 +62,10 @@ const CardsList = ({ cardsList }) => {
       {suitFilter &&
         cardsList
           .filter((actual) => actual.suit === suitFilter)
-          .map((actual, index) => {
-            <Card card={actual} key={index} />;
-          })}
+          .map((actual, index) => <Card card={actual} key={index} />)};
     </div>
+    </>
   );
 };
 
+export default CardsList
